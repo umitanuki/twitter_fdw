@@ -1,0 +1,18 @@
+Twitter Foreign Data Wrapper
+  Auther: Hitoshi Harada <umi.tanuki@gmail.com>
+
+This module implements Foreign Data Wrapper (FDW) handler of PostgreSQL which
+fetches text messages from Twitter over the Internet and returns as a table.
+The purpose is limited to the proof of concept of Foreign Data Wrapper API
+desgin only, so it is not recommended to use this for any other purpose.
+
+This module is depended on
+  libcurl <http://curl.haxx.se/libcurl/>
+  libjson <http://projects.snarc.org/libjson/>
+
+To install and try it,
+ $ export USE_PGXS=1
+ $ make && make install
+ $ psql -f twitter_fdw.sql
+ # SELECT from_user, created_at, text FROM twitter WHERE q = '#postgresql';
+
