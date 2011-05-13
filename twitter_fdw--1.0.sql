@@ -1,17 +1,14 @@
-/* contrib/twitter_fdw/twitter_fdw.sql.in */
-
--- Adjust this setting to control where the objects get created.
-SET search_path = public;
+/* contrib/twitter_fdw/twitter_fdw--1.0.sql */
 
 -- create wrapper with validator and handler
 CREATE OR REPLACE FUNCTION twitter_fdw_validator (text[], oid)
 RETURNS bool
-AS 'MODULE_PATHNAME','twitter_fdw_validator'
+AS 'MODULE_PATHNAME'
 LANGUAGE C STRICT;
 
 CREATE OR REPLACE FUNCTION twitter_fdw_handler ()
 RETURNS fdw_handler
-AS 'MODULE_PATHNAME','twitter_fdw_handler'
+AS 'MODULE_PATHNAME'
 LANGUAGE C STRICT;
 
 CREATE FOREIGN DATA WRAPPER twitter_fdw

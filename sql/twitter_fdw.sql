@@ -1,8 +1,4 @@
-SET client_min_messages = warning;
-\set ECHO none
-\i twitter_fdw.sql
-\set ECHO all
-RESET client_min_messages;
+CREATE EXTENSION twitter_fdw;
 
 SELECT count(*) FROM twitter;
 
