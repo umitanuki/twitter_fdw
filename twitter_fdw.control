@@ -1,0 +1,5 @@
+# twitter_fdw extension
+comment = 'twitter search API wrapper'
+default_version = '1.0'
+module_pathname = '$libdir/twitter_fdw'
+relocatable = true
