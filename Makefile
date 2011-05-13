@@ -2,12 +2,12 @@
 
 LIBJSON = libjson-0.8
 MODULE_big = twitter_fdw
-OBJS	= twitter_fdw.o
+OBJS	= twitter_fdw.o $(LIBJSON)/json.o
 
 DATA_built = twitter_fdw.sql 
 DATA = uninstall_twitter_fdw.sql 
 REGRESS = twitter_fdw
-SHLIB_LINK = -L$(LIBJSON) -ljson -lcurl
+SHLIB_LINK = -lcurl
 
 all:all-libjson
 

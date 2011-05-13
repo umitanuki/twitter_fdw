@@ -17,7 +17,7 @@
 #include "utils/builtins.h"
 
 #include "curl/curl.h"
-#include "libjson/json.h"
+#include "libjson-0.8/json.h"
 
 PG_MODULE_MAGIC;
 
@@ -121,13 +121,16 @@ twitter_fdw_handler(PG_FUNCTION_ARGS)
 {
 	FdwRoutine *fdwroutine = makeNode(FdwRoutine);
 
+	/*
+	 * Anything except Begin/Iterate is blank so far,
+	 * but FDW interface assumes all valid function pointers.
+	 */
 	fdwroutine->PlanForeignScan = twitterPlan;
 	fdwroutine->ExplainForeignScan = twitterExplain;
 	fdwroutine->BeginForeignScan = twitterBegin;
 	fdwroutine->IterateForeignScan = twitterIterate;
 	fdwroutine->ReScanForeignScan = twitterReScan;
 	fdwroutine->EndForeignScan = twitterEnd;
-	/* everything else is not needed */
 
 	PG_RETURN_POINTER(fdwroutine);
 }
@@ -279,8 +282,9 @@ twitterBegin(ForeignScanState *node, int eflags)
 	{
 		bool		param_first = true;
 		ListCell   *lc;
+		List	   *quals = list_copy(node->ss.ps.qual);
 
-		foreach (lc, node->ss.ps.qual)
+		foreach (lc, quals)
 		{
 			ExprState	   *state = lfirst(lc);
 
@@ -295,11 +299,14 @@ twitterBegin(ForeignScanState *node, int eflags)
 				appendStringInfoString(&url, param);
 				if (param[0] == 'q' && param[1] == '=')
 					param_q = &param[2];
+
+				/* take it from original qual */
+				node->ss.ps.qual = list_delete(node->ss.ps.qual, (void *) state);
 			}
-			else
-				elog(ERROR, "Unknown qual");
+//			else
+//				elog(ERROR, "Unknown qual");
 		}
-		node->ss.ps.qual = NIL;
+//		node->ss.ps.qual = NIL;
 	}
 
 	json_parser_dom_init(&helper, create_structure, create_data, append);
@@ -320,7 +327,7 @@ twitterBegin(ForeignScanState *node, int eflags)
 
 	/* status != 200, or other similar error */
 	if (!root)
-		elog(ERROR, "Failed fetching response from %s", url.data);
+		elog(INFO, "Failed fetching response from %s", url.data);
 
 #ifdef NOT_USE
 	if (root->results)
@@ -354,20 +361,19 @@ twitterIterate(ForeignScanState *node)
 	TupleTableSlot	   *slot = node->ss.ss_ScanTupleSlot;
 	TwitterReply	   *reply = (TwitterReply *) node->fdw_state;
 	ResultRoot		   *root = reply->root;
-	Tweet			   *tweet = root->results->elements[reply->rownum];
+	Tweet			   *tweet;
 	HeapTuple			tuple;
 	Relation			rel = node->ss.ss_currentRelation;
 	int					i, natts;
 	char			  **values;
 	MemoryContext		oldcontext;
 
-
-	if (!(root->results && reply->rownum < root->results->index))
+	if (!root || !(root->results && reply->rownum < root->results->index))
 	{
 		ExecClearTuple(slot);
 		return slot;
 	}
-
+	tweet = root->results->elements[reply->rownum];
 	natts = rel->rd_att->natts;
 	values = (char **) palloc(sizeof(char *) * natts);
 	for (i = 0; i < natts; i++)
@@ -455,7 +461,7 @@ create_structure(int nesting, int is_object)
 		{
 			ResultRoot	   *root;
 
-			root = (ResultRoot *) palloc(sizeof(ResultRoot));
+			root = (ResultRoot *) palloc0(sizeof(ResultRoot));
 			return (void *) root;
 		}
 		else if (nesting == 2)
