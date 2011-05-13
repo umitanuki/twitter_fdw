@@ -523,6 +523,9 @@ append(void *structure, char *key, uint32_t key_length, void *obj)
 {
 	if (key != NULL)
 	{
+		/* discard any unnecessary data */
+		if (structure == dummy_p)
+			return 0;
 		if (strcmp(key, "results") == 0)
 		{
 			/* root.results = array; */
