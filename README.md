@@ -44,7 +44,7 @@ The column `q` is a virtual column that is passed to API as a
 query string if the column is used with `=` operator as
 WHERE q = '#sometext'. You can put any text as defined in the API
 parameter `q`. Note the query string is percent-encoded by the module.
-The other columns is mapped to the corresponding property name of
+The other columns are mapped to the corresponding property name of
 each tweet item in the API result. For more detail on these values,
 see the API document.
 
