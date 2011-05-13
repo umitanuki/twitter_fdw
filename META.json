@@ -1,0 +1,29 @@
+{
+	"name": "twitter_fdw",
+	"abstract": "a foreign data wrapper to Twitter Search",
+	"description": "This provides an access to Twitter Search API, returning the result as a table",
+	"version": "1.0.0",
+	"maintainer": "Hitoshi Harada <umi.tanuki@gmail.com>",
+	"license": "postgresql",
+	"resources": {
+		"bugtracker": {
+			"web": "http://github.com/umitanuki/twitter_fdw/issues/"
+		},
+		"repository": {
+			"url": "git://github.com/umitanuki/twitter_fdw.git",
+			"web": "http://github.com/umitanuki/twitter_fdw",
+			"type": "git"
+		}
+	},
+	"meta-spec": {
+		"version": "1.0.0",
+		"url": "http://pgxn.org/meta/spec.txt"
+	},
+	"tags": [
+		"fdw",
+		"twitter",
+		"internet",
+		"web",
+		"api"
+	]
+}
