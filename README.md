@@ -70,7 +70,7 @@ Hitoshi Harada <umi.tanuki@gmail.com>
 Copyright and License
 ---------------------
 
-Copyright (c) Hitosih Harada
+Copyright (c) Hitoshi Harada
 
 This module is free software; you can redistribute it and/or modify it under
 the [PostgreSQL License](http://www.opensource.org/licenses/postgresql).
@@ -85,8 +85,8 @@ indirect, special, incidental, or consequential damages, including
 lost profits, arising out of the use of this software and its documentation,
 even if Hitoshi Harada has been advised of the possibility of such damage.
 
-Hitoshi Harada specifically disclaim any warranties,
+Hitoshi Harada specifically disclaims any warranties,
 including, but not limited to, the implied warranties of merchantability and
 fitness for a particular purpose. The software provided hereunder is on an "as
-is" basis, and Hitoshi Harada have no obligations to provide maintenance,
+is" basis, and Hitoshi Harada has no obligations to provide maintenance,
 support, updates, enhancements, or modifications.
