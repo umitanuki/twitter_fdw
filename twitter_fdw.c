@@ -15,6 +15,7 @@
 #include "parser/parsetree.h"
 #include "storage/fd.h"
 #include "utils/builtins.h"
+#include "utils/rel.h"
 
 #include "curl/curl.h"
 #include "libjson-0.8/json.h"
