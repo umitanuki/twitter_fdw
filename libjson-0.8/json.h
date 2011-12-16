@@ -21,7 +21,7 @@
 #define JSON_MINOR	7
 #define JSON_VERSION	(JSON_MAJOR * 100 + JSON_MINOR)
 
-typedef enum 
+typedef enum
 {
 	JSON_NONE,
 	JSON_ARRAY_BEGIN,

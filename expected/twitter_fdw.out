@@ -1,12 +1,12 @@
 CREATE EXTENSION twitter_fdw;
 SELECT count(*) FROM twitter;
- count 
+ count
 -------
      0
 (1 row)
 
 SELECT count(*) FROM twitter WHERE q = '#postgresql';
- count 
+ count
 -------
     15
 (1 row)
@@ -16,7 +16,7 @@ INSERT INTO twtest(from_user)
 	SELECT from_user FROM twitter WHERE q = '#postgres' LIMIT 1;
 SELECT true FROM twtest INNER JOIN
 	twitter USING(from_user) WHERE q = '#postgres';
- bool 
+ bool
 ------
  t
 (1 row)
