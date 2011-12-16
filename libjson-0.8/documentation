@@ -131,7 +131,7 @@ All libjson structure are fully available for the library user so that they can
 also be allocated on the function stack for pratical purpose.
 
 = Parsing API
- 
+
 == Parsing Context
 
 The first thing you need to parse a document is a parsing context. Every

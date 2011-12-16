@@ -51,7 +51,7 @@ static int printchannel(void *userdata, const char *data, uint32_t length)
 static int prettyprint(void *userdata, int type, const char *data, uint32_t length)
 {
 	json_printer *printer = userdata;
-	
+
 	return json_print_pretty(printer, type, data, length);
 }
 
@@ -126,7 +126,7 @@ static int do_verify(json_config *config, const char *filename)
 	ret = json_parser_is_done(&parser);
 	if (!ret)
 		return 1;
-	
+
 	close_filename(filename, input);
 	return 0;
 }
@@ -161,7 +161,7 @@ static int do_parse(json_config *config, const char *filename)
 		fprintf(stderr, "syntax error\n");
 		return 1;
 	}
-	
+
 	close_filename(filename, input);
 	return 0;
 }
