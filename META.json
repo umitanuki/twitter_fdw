@@ -4,7 +4,16 @@
 	"description": "This provides an access to Twitter Search API, returning the result as a table",
 	"version": "1.0.1",
 	"maintainer": "Hitoshi Harada <umi.tanuki@gmail.com>",
-	"license": "postgresql",
+	"license": {
+		"PostgreSQL": "http://www.postgresql.org/about/licence"
+	},
+	"provides": {
+		"twitter_fdw": {
+			"file": "twitter_fdw.sql",
+			"version": "1.0.0",
+			"docfile": "README.md"
+		}
+	},
 	"resources": {
 		"bugtracker": {
 			"web": "http://github.com/umitanuki/twitter_fdw/issues/"
