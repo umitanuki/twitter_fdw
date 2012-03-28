@@ -19,13 +19,6 @@ clean: clean-libjson
 clean-libjson:
 	$(MAKE) -C $(LIBJSON) clean
 
-ifdef USE_PGXS
 PG_CONFIG = pg_config
 PGXS := $(shell $(PG_CONFIG) --pgxs)
 include $(PGXS)
-else
-subdir = contrib/twitter_fdw
-top_builddir = ../..
-include $(top_builddir)/src/Makefile.global
-include $(top_srcdir)/contrib/contrib-global.mk
-endif

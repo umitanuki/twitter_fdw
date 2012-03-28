@@ -2,7 +2,7 @@
 	"name": "twitter_fdw",
 	"abstract": "a foreign data wrapper to Twitter Search",
 	"description": "This provides an access to Twitter Search API, returning the result as a table",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"maintainer": "Hitoshi Harada <umi.tanuki@gmail.com>",
 	"license": "postgresql",
 	"resources": {

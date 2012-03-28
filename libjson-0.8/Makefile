@@ -27,6 +27,8 @@ INSTALLDIR ?= $(DESTDIR)$(PREFIX)
 
 TARGETS = $(A_TARGETS) $(SO_FILE) $(SO_LINKS) $(BIN_TARGETS) $(PC_TARGET)
 
+UNAME := $(shell uname)
+
 all: $(TARGETS)
 
 lib$(NAME).a: $(NAME).o
@@ -42,7 +44,11 @@ lib$(NAME).so.$(MAJOR).$(MINOR): lib$(NAME).so.$(MAJOR).$(MINOR).$(MICRO)
 	ln -sf $< $@
 
 lib$(NAME).so.$(MAJOR).$(MINOR).$(MICRO): $(NAME).o
+ifeq ($(UNAME), Darwin)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(SHLIB_CFLAGS) -o $@ $^
+else
 	$(CC) $(CFLAGS) $(LDFLAGS) -Wl,-soname -Wl,lib$(NAME).so.$(MAJOR).$(MINOR).$(MICRO) $(SHLIB_CFLAGS) -o $@ $^
+endif
 
 $(NAME)lint: $(NAME)lint.o $(NAME).o
 	$(CC) $(CFLAGS) -o $@ $+

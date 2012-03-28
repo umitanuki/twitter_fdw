@@ -8,7 +8,6 @@ Twitter over the Internet and returns as a table.
 Installation
 ------------
 
-    $ export USE_PGXS=1
     $ make && make install
     $ psql -c "CREATE EXTENSION twitter_fdw" db
 
