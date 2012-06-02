@@ -1,0 +1,16 @@
+Revision history for twitter_fdw
+
+1.1.1   2012-06-02
+        - Add the Changes file.
+
+1.1.0   2012-06-01
+        - Support PostgreSQL 9.2.
+        - Add search URL to EXPLAIN output.
+
+1.0.1   2012-03-28
+        - Remove USE_PGXS option.
+
+1.0.0   2011-05-13
+        - Initial public release.
+        - Support search API with q parameter.
+		
